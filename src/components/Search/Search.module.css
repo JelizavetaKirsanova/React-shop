@@ -1,4 +1,11 @@
 .button{
-    background-color: blue;
-    color:aliceblue
+    background-color: green;
+    color:aliceblue;
+    height: 40px;
+    width: 70px
+}
+input{
+    border: 2px solid green;
+    height: 40px;
+    width: 250px
 }

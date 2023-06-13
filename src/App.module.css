@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.AppHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  
+}
+
+.AdContainer{
+    width: 500px;
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 30px;
+    align-items: center;
+    align-content: center;
+    text-transform: capitalize;
+}
+
+.AppHeader>button{
+  background-color: green;
+  color: white;
+  width: 150px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.AppHeader>select{
+  width: 50px;
+  height: 25px;
+  font-size: 14px;
+}
+
+.main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
