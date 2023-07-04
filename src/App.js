@@ -2,16 +2,19 @@ import logo from "./logo.svg";
 import styles from "./App.module.css";
 import Ad from "./components/Ad/Ad";
 import Search from "./components/Search/Search";
+import { upload } from "./services/firebase/upload";
+import { useEffect, useState } from "react";
+import { get } from "./services/firebase/get";
 
 function App() {
-  const Ads = [
-    { title: "Test 1", description: "Some description", price: 12.0 },
-    { title: "Test 2", description: "Some description", price: 2.0 },
-    { title: "Test 3", description: "Some description", price: 1.0 },
-    { title: "Test 4", description: "Some description", price: 32.0 },
-    { title: "Test 5", description: "Some description", price: 1.0 },
-    { title: "Test 6", description: "Some description", price: 0.5 },
-  ];
+  const [Ads,setAds] = useState([])
+  useEffect( ()=>{
+   getData()
+  },[])
+  async function getData(){
+    setAds(await get())
+
+  }
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
