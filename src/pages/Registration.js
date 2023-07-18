@@ -19,7 +19,7 @@ function Registration() {
         // Signed in
         const user = userCredential.user;
         console.log(user)
-        // ...
+        window.location.href = "/"
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -51,4 +51,4 @@ function Registration() {
   );
 }
 
-export { Registration };
+export default Registration ;

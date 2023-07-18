@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { get } from "../services/firebase/get";
 import { deleteAd } from "../services/firebase/delete";
 import { Link } from "react-router-dom";
+import userStore from "../store/store.js";
+import {observer} from "mobx-react"
 
 function Home() {
   const [Ads, setAds] = useState([]);
@@ -14,7 +16,7 @@ function Home() {
   async function getData() {
     setAds(await get());
   }
-
+console.log(userStore.user)
   async function deleteData(id) {
     await deleteAd(id);
     setAds((prevstate) => prevstate.filter((item) => item.id !== id));
@@ -22,8 +24,20 @@ function Home() {
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
-        <Link to="/login" className={styles.link}>Login</Link>
-        <Link to="/reg" className={styles.link}>Registration</Link>
+        {userStore.user ? (
+          ""
+        ) : (
+          <>
+            <Link to="/login" className={styles.link}>
+              Login
+            </Link>
+            <Link to="/reg" className={styles.link}>
+              Registration
+            </Link>
+          </>
+
+        )}
+
         <select>
           <option>ENG</option>
           <option>RUS</option>
@@ -42,4 +56,4 @@ function Home() {
   );
 }
 
-export { Home };
+export default observer(Home) ;
