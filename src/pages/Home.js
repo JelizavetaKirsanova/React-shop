@@ -22,8 +22,8 @@ function Home() {
   return (
     <div className={styles.App}>
       <header className={styles.AppHeader}>
-        <Link to="/login">Login</Link>
-        <Link to="/reg">Registration</Link>
+        <Link to="/login" className={styles.link}>Login</Link>
+        <Link to="/reg" className={styles.link}>Registration</Link>
         <select>
           <option>ENG</option>
           <option>RUS</option>

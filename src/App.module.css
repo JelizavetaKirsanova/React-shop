@@ -27,11 +27,14 @@
   color: white;
   width: 150px;
   height: 25px;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 5px;
+
 }
 
 .AppHeader>select{
-  width: 50px;
+  width: 60px;
   height: 25px;
   font-size: 14px;
 }
@@ -41,4 +44,17 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+}
+
+.link{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  background-color: green ;
+  margin: 1px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
 }

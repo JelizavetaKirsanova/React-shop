@@ -1,30 +1,14 @@
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { validateEmail } from "../services/validateEmail";
+import { validatePassword } from "../services/validatePassword";
 
 function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth();
 
-  function validateEmail(inputText) {
-    var mailFormat =  /\S+@\S+\.\S+/;
-    if (inputText.match(mailFormat)) {
-      return true;
-    } else {
-        alert("invalid email")
-      return false;
-
-    }
-  }
-  function validatePassword(inputText){
-    if (inputText.length > 7){
-        return true
-    } else{
-        alert("invalid password")
-        return false
-    }
-  }
 
   const register = () => {
     if (!validateEmail(email) || !validatePassword(password)){
@@ -51,11 +35,13 @@ function Registration() {
       <h1>Registration</h1>
       <input
         type="email"
+        placeholder="email..."
         value={email}
         onChange={(event) => setEmail(event.currentTarget.value)}
       />
       <input
         type="password"
+        placeholder="password..."
         value={password}
         onChange={(event) => setPassword(event.currentTarget.value)}
       />
