@@ -2,11 +2,12 @@ import styles from "../App.module.css";
 import Ad from "../components/Ad/Ad";
 import Search from "../components/Search/Search";
 import { useEffect, useState } from "react";
-import { get } from "../services/firebase/get";
+import { getAdsByCategory } from "../services/firebase/getAdsByCategory";
 import { deleteAd } from "../services/firebase/delete";
 import { Link } from "react-router-dom";
 import userStore from "../store/store.js";
-import {observer} from "mobx-react"
+import { observer } from "mobx-react";
+import { getCategories } from "../services/firebase/getCategories";
 
 function Home() {
   const [Ads, setAds] = useState([]);
@@ -14,9 +15,17 @@ function Home() {
     getData();
   }, []);
   async function getData() {
-    setAds(await get());
+    const categories = await getCategories();
+    const ads = categories.map(async (category) => {
+      return await {
+        category,
+        ads: await getAdsByCategory(category),
+      };
+    });
+    setAds(ads);
+    console.log(ads)
   }
-console.log(userStore.user)
+  console.log(userStore.user);
   async function deleteData(id) {
     await deleteAd(id);
     setAds((prevstate) => prevstate.filter((item) => item.id !== id));
@@ -35,7 +44,6 @@ console.log(userStore.user)
               Registration
             </Link>
           </>
-
         )}
 
         <select>
@@ -48,7 +56,12 @@ console.log(userStore.user)
       <main className={styles.main}>
         <div className={styles.AdContainer}>
           {Ads.map((ad) => (
-            <Ad ad={ad} delete={deleteData} />
+            <div>
+              {" "}
+              <h2>{ad.category.title}</h2>
+              {ad.Ads.map((el)=>(<Ad ad={el} delete={deleteData} />))}
+              {" "}
+            </div>
           ))}
         </div>
       </main>
@@ -56,4 +69,4 @@ console.log(userStore.user)
   );
 }
 
-export default observer(Home) ;
+export default observer(Home);
