@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import userStore from "../store/store.js";
 import {observer} from "mobx-react"

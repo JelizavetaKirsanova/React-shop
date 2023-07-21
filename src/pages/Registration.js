@@ -1,31 +1,15 @@
 import { Link } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { validateEmail } from "../services/validateEmail";
-import { validatePassword } from "../services/validatePassword";
+import {observer} from "mobx-react"
+import userStore from "../store/store.js";
 
 function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const auth = getAuth();
-
 
   const register = () => {
-    if (!validateEmail(email) || !validatePassword(password)){
-        return
-    }
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user)
-        window.location.href = "/"
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    userStore.signUp(email, password)
+  .then(()=>{window.location.href = "/"})
   };
 
   return (
@@ -51,4 +35,4 @@ function Registration() {
   );
 }
 
-export default Registration ;
+export default observer(Registration) ;
