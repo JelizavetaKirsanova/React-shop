@@ -16,14 +16,15 @@ function Home() {
   }, []);
   async function getData() {
     const categories = await getCategories();
-    const ads = categories.map(async (category) => {
-      return await {
+    const adsPromises = categories.map(async (category) => {
+      return {
         category,
         ads: await getAdsByCategory(category),
       };
     });
+    const ads = await Promise.all(adsPromises);
     setAds(ads);
-    console.log(ads)
+    console.log(ads);
   }
   console.log(userStore.user);
   async function deleteData(id) {
@@ -57,10 +58,10 @@ function Home() {
         <div className={styles.AdContainer}>
           {Ads.map((ad) => (
             <div>
-              {" "}
               <h2>{ad.category.title}</h2>
-              {ad.Ads.map((el)=>(<Ad ad={el} delete={deleteData} />))}
-              {" "}
+              {ad.ads.map((el) => (
+                <Ad ad={el} delete={deleteData} />
+              ))}
             </div>
           ))}
         </div>
