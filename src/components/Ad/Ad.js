@@ -2,7 +2,6 @@ import styles from "./Ad.module.css";
 import svg from "./cross.svg";
 
 export default function Ad(props) {
-  console.log(props.ad);
   return (
     <div className={styles.grid}>
       <div className={styles.crossContainer}>

@@ -19,14 +19,12 @@ function Home() {
     const adsPromises = categories.map(async (category) => {
       return {
         category,
-        ads: await getAdsByCategory(category),
+        ads: await getAdsByCategory(category.id),
       };
     });
     const ads = await Promise.all(adsPromises);
     setAds(ads);
-    console.log(ads);
   }
-  console.log(userStore.user);
   async function deleteData(id) {
     await deleteAd(id);
     setAds((prevstate) => prevstate.filter((item) => item.id !== id));
@@ -59,6 +57,7 @@ function Home() {
           {Ads.map((ad) => (
             <div>
               <h2>{ad.category.title}</h2>
+
               {ad.ads.map((el) => (
                 <Ad ad={el} delete={deleteData} />
               ))}

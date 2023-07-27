@@ -1,9 +1,8 @@
 import { db } from "./config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-
 export async function getAdsByCategory(category) {
-  const q = query(collection(db, "Ads"), where("category", "==", category))
+  const q = query(collection(db, "Ads"), where("category", "==", category));
   const querySnapshot = await getDocs(q);
   let ads = [];
   querySnapshot.forEach((doc) => {

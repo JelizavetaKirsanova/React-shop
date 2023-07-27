@@ -49,7 +49,6 @@ class User {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         window.location.href = "/";
       })
       .catch((error) => {
